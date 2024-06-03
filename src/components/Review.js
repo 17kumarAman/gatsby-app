@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Spinner from "../components/Generic/Spinner"; // Adjust the path as needed
 
 const Review = () => {
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -13,6 +15,8 @@ const Review = () => {
         setReviews(response.data.data);
       } catch (error) {
         console.error("Error fetching reviews:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchReviews();
@@ -20,12 +24,14 @@ const Review = () => {
 
   return (
     <div className="p-20 text-black">
-      <main className="">
+      <main>
         <section>
           <h2 className="text-4xl font-semibold py-4">
-            What Our Coustomers Says
+            What Our Customers Say
           </h2>
-          {reviews.length ? (
+          {loading ? (
+            <Spinner />
+          ) : (
             <div className="grid grid-cols-2 gap-10">
               {reviews.map((review) => (
                 <div
@@ -42,20 +48,18 @@ const Review = () => {
                   </p>
                   <div className="flex items-center mt-4">
                     <img
-                      src="./avtar.png"
+                      src="/path-to-your-avatar-image.png" // Update this path as per your project structure
                       alt={review.Name}
                       className="w-10 h-10 rounded-full"
                     />
                     <div className="ml-4">
                       <p className="text-xl font-semibold">{review.Name}</p>
-                      <p className="text-gray-500">patient</p>
+                      <p className="text-gray-500">Patient</p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          ) : (
-            <p>Loading reviews...</p>
           )}
         </section>
       </main>
