@@ -48,7 +48,7 @@ const Review = () => {
                   </p>
                   <div className="flex items-center mt-4">
                     <img
-                      src="/path-to-your-avatar-image.png" // Update this path as per your project structure
+                      src="./avtar.png" 
                       alt={review.Name}
                       className="w-10 h-10 rounded-full"
                     />
